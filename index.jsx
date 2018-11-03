@@ -14,7 +14,7 @@ const view = (state, actions) => (
       <audio id="chaching" preload="auto">
          <source src="money.mp3" />
       </audio>
-      <input type="image" src="https://investorplace.com/wp-content/uploads/2013/12/dogecoin.png" onclick={()=>actions.inc()} />
+      <input type="image" src="http://bestanimations.com/Money/Coins/gold-coins-animated-gif.gif" onclick={()=>actions.inc()} />
    </div>
 )
 
