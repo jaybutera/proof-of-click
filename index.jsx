@@ -14,7 +14,7 @@ const actions = {
 const view = (state, actions) => (
    <div>
       <h1>{ state.count }</h1>
-      <input type="image" src="https://investorplace.com/wp-content/uploads/2013/12/dogecoin.png" onclick={()=>actions.inc()} />
+      <input type="image" src="https://investorplace.com/wp-content/uploads/2013/12/dogecoin.png" onclick
    </div>
 )
 
