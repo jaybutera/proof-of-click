@@ -6,7 +6,7 @@ import { h, app } from 'hyperapp'
 const state = {}
 
 const actions = {
-   inc: () => state => { document.getElementById('chaching').play() }
+   inc: () => { new Audio(document.getElementById('chaching').currentSrc).play() }
 }
 
 const view = (state, actions) => (
