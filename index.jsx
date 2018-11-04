@@ -16,6 +16,12 @@ const state = {
 
 const actions = {
    inc: () => { new Audio(document.getElementById('chaching').currentSrc).play() },
+   click: () => async (state, actions) => {
+      const addr = (await web3.eth.getAccounts())[0]
+      const token = new web3.eth.Contract(ETabi, ETaddr)
+      await token.methods.mint(addr, 1).send({from: addr})
+      actions.u_token(await token.methods.balanceOf(addr).call({from:addr}))
+   },
    coin_bal: () => async (state, actions) => {
       const addr = (await web3.eth.getAccounts())[0]
       const bal  = Number(web3.utils.fromWei(await web3.eth.getBalance(addr), 'ether'))
@@ -23,12 +29,10 @@ const actions = {
    },
    //u: (x) => state => (x)
    u_coin: (x) => state => ({ coin: x }),
-   token_bal: () => async (state, actions) => {
-      const addr = (await web3.eth.getAccounts())[0]
-      const token = new web3.eth.Contract(ETabi, ETaddr)
-      actions.u_token(await token.methods.balanceOf(addr).call())
-   },
    u_token: (x) => state => ({ token: x }),
+   transmute: () => async (state, actions) => {
+      const addr = (await web3.eth.getAccounts())[0]
+   }
 }
 
 const view = (state, actions) => (
@@ -37,11 +41,10 @@ const view = (state, actions) => (
          <source src="money.mp3" />
       </audio>
    <center>
-      <input type="image" src="http://bestanimations.com/Money/Coins/gold-coins-animated-gif.gif" onclick={()=>actions.inc()} />
+      <input type="image" src="http://bestanimations.com/Money/Coins/gold-coins-animated-gif.gif" onclick={()=>actions.click()} />
    </center>
    <button onclick={()=>actions.coin_bal()}>Do it</button>
    { state.coin }
-   <button onclick={()=>actions.token_bal()}>You wont</button>
    { state.token }
    </div>
 )
