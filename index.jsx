@@ -15,8 +15,8 @@ const state = {
 }
 
 const actions = {
-   inc: () => { new Audio(document.getElementById('chaching').currentSrc).play() },
    click: () => async (state, actions) => {
+      new Audio(document.getElementById('chaching').currentSrc).play()
       const addr = (await web3.eth.getAccounts())[0]
       const token = new web3.eth.Contract(ETabi, ETaddr)
       await token.methods.mint(addr, 1).send({from: addr})
@@ -37,6 +37,7 @@ const actions = {
       const tbal  = await token.methods.balanceOf(addr).call({from:addr})
       // Transmute
       const contract = new web3.eth.Contract(TransmuteAbi, TransmuteAddr)
+      console.log( await token.methods.approve(TransmuteAddr, tbal).send({from:addr}) )
       console.log( await contract.methods.transformFrom(addr, tbal).send({from:addr}) )
       actions.coin_bal()
    }
@@ -50,10 +51,15 @@ const view = (state, actions) => (
    <center>
       <input type="image" src="http://bestanimations.com/Money/Coins/gold-coins-animated-gif.gif" onclick={()=>actions.click()} />
    </center>
-   { state.token }
-   <button onclick={()=>actions.coin_bal()}>Do it</button>
-   <button onclick={()=>actions.transmute()}>REWARDZ</button>
-   { state.coin }
+
+   <br />
+   <center>
+   <div style={{color:"#404040", fontFamily:"Helvetica", fontSize:"100px"}}>
+      { state.token }
+      <button style={{height:"60px"}} onclick={()=>actions.transmute()}>REWARDZ</button>
+      { state.coin }
+   </div>
+   </center>
    </div>
 )
 
