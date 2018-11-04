@@ -6,7 +6,7 @@ import ETabi from './abis/ExampleToken.json'
 import TransmuteAbi from './abis/Transmute.json'
 
 // Deployed contract addresses go here
-const ETaddr = '0xffe7175d93dc73f6bdfea632fc46f83015341e5c'
+const ETaddr        = '0xffe7175d93dc73f6bdfea632fc46f83015341e5c'
 const TransmuteAddr = '0x6931451def1999457b8e82b223b1d2802ab29b23'
 
 const web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider("http://localhost:8545"))
