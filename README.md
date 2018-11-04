@@ -38,3 +38,7 @@ button invokes the transmutation contract and results in your account balance in
 
 ### Also
 The frontend uses [hyperapp](https://github.com/JorgeBucaran/hyperapp), a wonderful lightweight alternative to React.
+
+As a final note, you may run into a CORS issue when trying to connect to a local testnet in the browser. If you are
+using Firefox, downloading [this](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/) extension will do the trick (don't leave it on though). Other browsers should have
+similar solutions
