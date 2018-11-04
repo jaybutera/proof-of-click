@@ -32,6 +32,13 @@ const actions = {
    u_token: (x) => state => ({ token: x }),
    transmute: () => async (state, actions) => {
       const addr = (await web3.eth.getAccounts())[0]
+      // Get token balance
+      const token = new web3.eth.Contract(ETabi, ETaddr)
+      const tbal  = await token.methods.balanceOf(addr).call({from:addr})
+      // Transmute
+      const contract = new web3.eth.Contract(TransmuteAbi, TransmuteAddr)
+      console.log( await contract.methods.transformFrom(addr, tbal).send({from:addr}) )
+      actions.coin_bal()
    }
 }
 
@@ -43,9 +50,10 @@ const view = (state, actions) => (
    <center>
       <input type="image" src="http://bestanimations.com/Money/Coins/gold-coins-animated-gif.gif" onclick={()=>actions.click()} />
    </center>
-   <button onclick={()=>actions.coin_bal()}>Do it</button>
-   { state.coin }
    { state.token }
+   <button onclick={()=>actions.coin_bal()}>Do it</button>
+   <button onclick={()=>actions.transmute()}>REWARDZ</button>
+   { state.coin }
    </div>
 )
 
