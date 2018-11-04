@@ -3,8 +3,8 @@ import Web3 from 'web3'
 import ETabi from './abis/ExampleToken.json'
 import TransmuteAbi from './abis/Transmute.json'
 
-const ETaddr = '0xb863e9df9c9b860d3a8fdec4298fc1c8d8b4fc8a'
-const TransmuteAddr = '0xbe99cd10447142431d312cdde568789548fef4f5'
+const ETaddr = '0x6bc8aea230be09affb9b1791fcbf0a8b62423f19'
+const TransmuteAddr = '0xccbcf865ce791688110228895761ee895d875a74'
 
 const web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider("http://localhost:8545"))
 console.log(Web3.givenProvider)
@@ -25,7 +25,8 @@ const actions = {
    coin_bal: () => async (state, actions) => {
       const addr = (await web3.eth.getAccounts())[0]
       const bal  = Number(web3.utils.fromWei(await web3.eth.getBalance(addr), 'ether'))
-      actions.u_coin( bal )
+      actions.u_coin( (bal - 90).toFixed(3) )
+      actions.u_token( 0 )
    },
    //u: (x) => state => (x)
    u_coin: (x) => state => ({ coin: x }),
