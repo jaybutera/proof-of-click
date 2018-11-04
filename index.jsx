@@ -15,9 +15,10 @@ const actions = {
    coin_bal: () => async (state, actions) => {
       const addr = (await web3.eth.getAccounts())[0]
       const bal  = Number(web3.utils.fromWei(await web3.eth.getBalance(addr), 'ether'))
-      actions.u({ coin: bal })
+      actions.u_token( bal )
    },
-   u: (x) => state => (x)
+   //u: (x) => state => (x)
+   u_coin: (x) => state => ({ coin: x })
 }
 
 const view = (state, actions) => (
