@@ -12,6 +12,20 @@ by Bitcoin.
 This code uses smart contracts defined in [this repository](https://github.com/jaybutera/transmute). ABIs are provided
 in this repository but be wary, they must be updated if the contracts are modified.
 
+First run an rpc ethereum client like ganache-cli
+```
+npm i -g ganache-cli
+ganache-cli
+```
+
+Deploy the contracts in transmute repository
+```
+truffle migrate --network development
+```
+
+After migration, the contract addresses will print to stdout. Copy the ExampleToken and Transmute address into lines 5&6
+of the index.jsx file of this repository.
+Finally, compile (tanspile/bundle) the code and check it out
 ```
 npm install
 npm run bundle
